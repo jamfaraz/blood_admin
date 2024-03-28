@@ -1,5 +1,7 @@
 
+import 'package:blood_donor_app/screens/chat/chats.dart';
 import 'package:blood_donor_app/screens/dashboard/home_screen.dart';
+import 'package:blood_donor_app/screens/dashboard/notification_screen.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -7,7 +9,6 @@ import 'package:get/get.dart';
 import '../../../../controllers/auth_controller.dart';
 import '../../../../controllers/data_controller.dart';
 import '../../../../controllers/notification.dart';
-import 'my_orders.dart';
 import '../profile/profile.dart';
 
 
@@ -58,7 +59,8 @@ class _DashboardState extends State<Dashboard>
           index: selectedIndex,
           children:const  [
             HomeScreen(),
-            AllScheduleScreen(),
+            MessageView(),
+            UserNotificationScreen(),
             Profile(),
            
           ],
@@ -80,7 +82,7 @@ class _DashboardState extends State<Dashboard>
           items: [
             BottomNavigationBarItem(
               icon: Icon(
-                Icons.home,size: 24,
+                Icons.home,size: 30,
                 color: selectedIndex == 0 ? Colors.black : Colors.grey.shade400,
               ),
               label: 'Home',
@@ -89,16 +91,24 @@ class _DashboardState extends State<Dashboard>
            
             BottomNavigationBarItem(
               icon: Icon(
-              selectedIndex == 1 ?Icons.favorite:  Icons.favorite_border,size: 24,
-                color: selectedIndex == 1 ? Colors.black : null,
+              Icons.chat,size: 26,
+                color: selectedIndex == 1 ? Colors.black : Colors.grey,
               ),
-              label: 'My orders',
+              label: 'Chats',
               backgroundColor: Colors.white,
             ),
             BottomNavigationBarItem(
               icon: Icon(
-                Icons.account_circle,size: 24,
-                color: selectedIndex == 2 ? Colors.black : null,
+              Icons.notifications,size: 29,
+                color: selectedIndex == 2 ? Colors.black : Colors.grey,
+              ),
+              label: 'Notifications',
+              backgroundColor: Colors.white,
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.account_circle,size: 28,
+                color: selectedIndex == 3 ? Colors.black : Colors.grey,
               ),
               backgroundColor: Colors.white,
               label: 'Profile',

@@ -16,9 +16,9 @@
     <!-- The Agora SDK requires Bluetooth permissions in case users are using Bluetooth devices.-->
     <uses-permission  android:name="android.permission.BLUETOOTH"  />
     <application
-        android:label="blood_donor_app"
+        android:label="Blood Donor"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/launcher_icon">
 
       <meta-data android:name="com.google.android.geo.API_KEY"
            android:value="AIzaSyClYpe3KJC3r3g4d66CJC6lHXJOSSJKihc"/>
