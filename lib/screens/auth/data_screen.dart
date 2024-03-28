@@ -269,10 +269,9 @@ class _DataScreenState extends State<DataScreen> {
                           contentPadding: EdgeInsets.symmetric(
                             vertical: MediaQuery.of(context).size.width * 0.030,
                           ),
-                          filled: true,
-                          fillColor: const Color(0xffEEEEEE),
+                        
                           prefixIcon:
-                              const Icon(Icons.category, color: Colors.black),
+                               const Icon(Icons.category, color: Colors.red),
                           hintText: 'Select category',
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
