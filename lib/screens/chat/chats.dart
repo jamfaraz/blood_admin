@@ -1,4 +1,3 @@
-
 // }
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -8,7 +7,6 @@ import 'package:velocity_x/velocity_x.dart';
 
 import 'chat_screen.dart';
 
-
 class MessageView extends StatefulWidget {
   const MessageView({super.key});
 
@@ -17,8 +15,6 @@ class MessageView extends StatefulWidget {
 }
 
 class _MessageViewState extends State<MessageView> {
-
-  
   String searchText = "";
   TextEditingController searchController = TextEditingController();
   @override
@@ -28,15 +24,15 @@ class _MessageViewState extends State<MessageView> {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           centerTitle: true,
-          title:   const Text(
-                    'Chats',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Color(0xFF1A1A1A),
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
+          title: const Text(
+            'Chats',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Color(0xFF1A1A1A),
+              fontSize: 20,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
         ),
         body: Padding(
           padding: EdgeInsets.symmetric(
@@ -50,7 +46,7 @@ class _MessageViewState extends State<MessageView> {
               //   ),
               // ),
               11.heightBox,
-               Container(
+              Container(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(30),
@@ -63,9 +59,15 @@ class _MessageViewState extends State<MessageView> {
                       hintText: 'Search for donors',
                       border: InputBorder.none,
                       prefixIcon: (searchText.isEmpty)
-                          ? const Icon(Icons.search,color: Colors.red,)
+                          ? const Icon(
+                              Icons.search,
+                              color: Colors.red,
+                            )
                           : IconButton(
-                              icon: const Icon(Icons.clear,color: Colors.red,),
+                              icon: const Icon(
+                                Icons.clear,
+                                color: Colors.red,
+                              ),
                               onPressed: () {
                                 searchText = '';
                                 searchController.clear();
@@ -82,7 +84,7 @@ class _MessageViewState extends State<MessageView> {
                       });
                     }),
               ),
-              
+
               const SizedBox(height: 10),
               StreamBuilder(
                   stream: FirebaseFirestore.instance
@@ -91,7 +93,8 @@ class _MessageViewState extends State<MessageView> {
                       .snapshots(),
                   builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const Center(child: Padding(
+                      return const Center(
+                          child: Padding(
                         padding: EdgeInsets.only(top: 255),
                         child: CircularProgressIndicator(),
                       ));
@@ -134,9 +137,7 @@ class _MessageViewState extends State<MessageView> {
                                     if (targetUser == null) {
                                       return const SizedBox();
                                     }
-                                    return  
-                                    
-                                     Card(
+                                    return Card(
                                       shadowColor: Colors.black,
                                       color: Colors.white,
                                       elevation: 13,
@@ -147,7 +148,7 @@ class _MessageViewState extends State<MessageView> {
                                           borderRadius:
                                               BorderRadius.circular(14),
                                         ),
-                                        child: ListTile(                                               
+                                        child: ListTile(
                                           onTap: () {
                                             Get.to(() => ChatScreen(
                                                   fcmToken:
@@ -174,7 +175,7 @@ class _MessageViewState extends State<MessageView> {
                                             ),
                                           ),
                                           subtitle: Text(
-      //  encrypter?.decrypt64(chatData['lastMessage'], iv: iv).toString()??'';
+                                            //  encrypter?.decrypt64(chatData['lastMessage'], iv: iv).toString()??'';
 
                                             chatData['lastMessage'],
                                             style: const TextStyle(
@@ -186,7 +187,6 @@ class _MessageViewState extends State<MessageView> {
                                               right: 10,
                                             ),
                                             child: Text(
-                                              
                                               chatData['timeStamp'],
                                             ),
                                           ),

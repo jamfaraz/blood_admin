@@ -83,9 +83,8 @@ class _UserNotificationScreenState extends State<UserNotificationScreen> {
                           return Column(
                             children: [
                               GestureDetector(
-                                onTap: () {
-                                  // Get.to(()=>const ChatScreen());
-                                },
+                               
+                                
                                 onLongPress: () async {
                                   showDialog(
                                       context: context,

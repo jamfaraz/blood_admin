@@ -12,9 +12,9 @@ import 'package:uuid/uuid.dart';
 class DataController extends GetxController {
   FirebaseAuth auth = FirebaseAuth.instance;
 
- var isMessageSending = false.obs;
+  var isMessageSending = false.obs;
 
- sendMessageToFirebas(
+  sendMessageToFirebas(
       {Map<String, dynamic>? data,
       String? lastMessage,
       required String userId,
@@ -46,7 +46,8 @@ class DataController extends GetxController {
 
     isMessageSending(false);
   }
- sendMessageToFirebase(
+
+  sendMessageToFirebase(
       {Map<String, dynamic>? data,
       String? lastMessage,
       required String userId,
@@ -82,7 +83,7 @@ class DataController extends GetxController {
     List<String> ids = [userId, otherUserId];
     ids.sort();
     String chatRoomId = ids.join("_");
-    
+
     return FirebaseFirestore.instance
         .collection('chats')
         .doc(chatRoomId)
@@ -90,8 +91,8 @@ class DataController extends GetxController {
         .orderBy('timeStamp', descending: false)
         .snapshots();
   }
-// 
- 
+//
+
 //
 //
   Stream<QuerySnapshot> getNotificatiom(String uuidToRetrieve) {
@@ -103,29 +104,24 @@ class DataController extends GetxController {
         .snapshots();
   }
 
-
-
-  
-     
 //
 //
   Future<void> createNotification({
-     String? userId,
+    String? userId,
     required String message,
   }) async {
     var uuid = const Uuid();
     var myId = uuid.v6();
 
-
-
- DocumentSnapshot<Map<String, dynamic>> document=await FirebaseFirestore.instance
-          .collection('donors')
-          .doc(FirebaseAuth.instance.currentUser!.uid)
-          .get();
+    DocumentSnapshot<Map<String, dynamic>> document = await FirebaseFirestore
+        .instance
+        .collection('donors')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .get();
     final data = document.data()!;
-      String userName = data['username'] ;
-      String userProfileImage = data['image'] ;
-
+    String userName = data['username'];
+    String userProfileImage = data['image'];
+    String fcmToken = data['fcmToken'];
 
     try {
       await FirebaseFirestore.instance
@@ -136,6 +132,7 @@ class DataController extends GetxController {
         'userId': userId,
         'image': userProfileImage,
         'message': message,
+        'fcmToken': fcmToken,
         'name': userName,
         'time': DateTime.now()
       });
@@ -178,6 +175,4 @@ class DataController extends GetxController {
   }
 //
 //
-
- 
 }

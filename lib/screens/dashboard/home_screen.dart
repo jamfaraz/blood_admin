@@ -1,11 +1,11 @@
 import 'package:blood_donor_app/controllers/data_controller.dart';
-import 'package:blood_donor_app/controllers/notification.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../controllers/profile_controller.dart';
+import '../chat/chat_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -22,7 +22,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-    
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: SingleChildScrollView(
@@ -31,95 +30,94 @@ class _HomeScreenState extends State<HomeScreen> {
               SizedBox(
                 height: 44,
               ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    StreamBuilder(
-                        stream: FirebaseFirestore.instance
-                            .collection('donors')
-                            .snapshots(),
-                        builder:
-                            (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-                          if (snapshot.hasError) {
-                            return Text('Error: ${snapshot.error}');
-                          } else {
-                            return Column(
-                                children: snapshot.data?.docs.map((e) {
-                                      return Column(
-                                        children: [
-                                          e["donorId"] ==
-                                                  FirebaseAuth
-                                                      .instance.currentUser?.uid
-                                              ? Row(
-                                                  children: [
-                                                    CircleAvatar(
-                                                      radius: 30,
-                                                      backgroundImage:
-                                                          NetworkImage(
-                                                              e['image']),
-                                                    ),
-                                                    const SizedBox(
-                                                      width: 12,
-                                                    ),
-                                                    Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        const Text(
-                                                          'Hello,',
-                                                          style: TextStyle(
-                                                            color: Color(
-                                                                0xFF0C253F),
-                                                            fontSize: 12,
-                                                            fontWeight:
-                                                                FontWeight.w600,
-                                                          ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  StreamBuilder(
+                      stream: FirebaseFirestore.instance
+                          .collection('donors')
+                          .snapshots(),
+                      builder:
+                          (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                        if (snapshot.hasError) {
+                          return Text('Error: ${snapshot.error}');
+                        } else {
+                          return Column(
+                              children: snapshot.data?.docs.map((e) {
+                                    return Column(
+                                      children: [
+                                        e["donorId"] ==
+                                                FirebaseAuth
+                                                    .instance.currentUser?.uid
+                                            ? Row(
+                                                children: [
+                                                  CircleAvatar(
+                                                    radius: 30,
+                                                    backgroundImage:
+                                                        NetworkImage(
+                                                            e['image']),
+                                                  ),
+                                                  const SizedBox(
+                                                    width: 12,
+                                                  ),
+                                                  Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      const Text(
+                                                        'Hello Donor,',
+                                                        style: TextStyle(
+                                                          color:
+                                                              Color(0xFF0C253F),
+                                                          fontSize: 12,
+                                                          fontWeight:
+                                                              FontWeight.w600,
                                                         ),
-                                                        Text(
-                                                          e['username'],
-                                                          style:
-                                                              const TextStyle(
-                                                            color: Color(
-                                                                0xFF5A5A5A),
-                                                            fontSize: 12,
-                                                            fontWeight:
-                                                                FontWeight.w400,
-                                                            height: 0,
-                                                          ),
+                                                      ),
+                                                      Text(
+                                                        e['username'],
+                                                        style: const TextStyle(
+                                                          color:
+                                                              Color(0xFF5A5A5A),
+                                                          fontSize: 12,
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          height: 0,
                                                         ),
-                                                      ],
-                                                    ),
-                                                  ],
-                                                )
-                                              : const SizedBox()
-                                        ],
-                                      );
-                                    }).toList() ??
-                                    []);
-                          }
-                        }),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              )
+                                            : const SizedBox()
+                                      ],
+                                    );
+                                  }).toList() ??
+                                  []);
+                        }
+                      }),
 
-                    // IconButton(
-                    //   onPressed: () {
-                    //     Get.to(()=>const UserNotificationScreen());
-                    //   },
-                    //   icon: const Icon(
-                    //     Icons.notification_add,
-                    //     color: Colors.black,
-                    //   ),
-                    // ),
-                  ],
-                ),
-                Divider(),
-        //         Text(
-        //   'All Posts',
-        //   style: TextStyle(
-        //     color: Color(0xFF1A1A1A),
-        //     fontSize: 20,
-        //     fontWeight: FontWeight.w600,
-        //   ),
-        // ),
+                  // IconButton(
+                  //   onPressed: () {
+                  //     Get.to(()=>const UserNotificationScreen());
+                  //   },
+                  //   icon: const Icon(
+                  //     Icons.notification_add,
+                  //     color: Colors.black,
+                  //   ),
+                  // ),
+                ],
+              ),
+              Divider(),
+              //         Text(
+              //   'All Posts',
+              //   style: TextStyle(
+              //     color: Color(0xFF1A1A1A),
+              //     fontSize: 20,
+              //     fontWeight: FontWeight.w600,
+              //   ),
+              // ),
               StreamBuilder(
                 stream: FirebaseFirestore.instance
                     .collection('posts')
@@ -275,31 +273,55 @@ class _HomeScreenState extends State<HomeScreen> {
                                         const SizedBox(
                                           height: 16,
                                         ),
-                                        GestureDetector(
+                                        StreamBuilder(
+                                          stream: FirebaseFirestore.instance
+                                              .collection('users')
+                                              .where('userId',
+                                                  isEqualTo: data['userId'])
+                                              .snapshots(),
+                                          builder: (context, snapshot) {
+                                         
+                                            return Column(
+                                              children:snapshot.data?.docs.map((e) {
+                                                return Column(
+                                                  children: [
+                                                    GestureDetector(
                                           onTap: () async {
-                                            DocumentSnapshot<
-                                                    Map<String, dynamic>>
-                                                document =
-                                                await FirebaseFirestore.instance
-                                                    .collection('donors')
-                                                    .doc(FirebaseAuth.instance
-                                                        .currentUser!.uid)
-                                                    .get();
-                                            final userData = document.data()!;
-                                            String userName =
-                                                userData['username'];
+                                            // DocumentSnapshot<
+                                            //         Map<String, dynamic>>
+                                            //     document =
+                                            //     await FirebaseFirestore.instance
+                                            //         .collection('donors')
+                                            //         .doc(FirebaseAuth.instance
+                                            //             .currentUser!.uid)
+                                            //         .get();
+                                            // final userData = document.data()!;
+                                            // String userName =
+                                            //     userData['username'];
 
-                                            dataController.createNotification(
-                                              userId: data['userId'],
-                                              message:
-                                                  '$userName accepted your request now you can chat with each other',
-                                            );
-                                            LocalNotificationService
-                                                .sendNotification(
-                                                    title: 'Request Accepted',
-                                                    message:
-                                                        '$userName accepted your request',
-                                                    token: data['fcmToken']);
+                                            // dataController.createNotification(
+                                            //   userId: data['userId'],
+                                            //   message:
+                                            //       '$userName accepted your request now you can chat with each other',
+                                            // );
+                                            // LocalNotificationService
+                                            //     .sendNotification(
+                                            //         title: 'Request Accepted',
+                                            //         message:
+                                            //             '$userName accepted your request',
+                                            //         token: data['fcmToken']);
+                                                     Get.to(() => ChatScreen(
+                                                  fcmToken:
+                                                      e['fcmToken'],
+                                                  name: e['username'],
+                                                  image: e['image'],
+                                                  uid: e['userId'],
+                                                  groupId: FirebaseAuth.instance
+                                                      .currentUser!.uid,
+                                                ));
+
+
+
                                           },
                                           child: Container(
                                             margin: EdgeInsets.only(
@@ -323,7 +345,17 @@ class _HomeScreenState extends State<HomeScreen> {
                                               ),
                                             ),
                                           ),
+                                        )
+                                                  ],
+                                                );
+
+                                              }).toList()??[]
+                                                  
+                                              
+                                            );
+                                          },
                                         ),
+                                      
                                       ],
                                     ),
                                   ),
