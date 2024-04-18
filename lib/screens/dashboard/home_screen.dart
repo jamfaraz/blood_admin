@@ -218,7 +218,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 const Text(
-                                                  'Contact',
+                                                  'Blood type',
                                                   style: TextStyle(
                                                     color: Colors.green,
                                                     fontSize: 16,
@@ -226,7 +226,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   ),
                                                 ),
                                                 Text(
-                                                  data['contact'],
+                                                  data['category'],
                                                   style: const TextStyle(
                                                     color: Color(0xFF474747),
                                                     fontSize: 14,
@@ -323,7 +323,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
 
                                           },
-                                          child: Container(
+                                           child: Container(
                                             margin: EdgeInsets.only(
                                                 left: Get.width * .44),
                                             height: 34,
