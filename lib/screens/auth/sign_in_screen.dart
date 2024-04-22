@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-
 import '../../../controllers/auth_controller.dart';
 
 import '../widgets/primary_textfield.dart';
@@ -31,7 +30,6 @@ class _SigninScreenState extends State<SigninScreen> {
 
   @override
   Widget build(BuildContext context) {
- 
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
@@ -47,7 +45,7 @@ class _SigninScreenState extends State<SigninScreen> {
                   icon: Container(
                     height: 30,
                     width: 30,
-                    decoration:  BoxDecoration(
+                    decoration: BoxDecoration(
                       color: Colors.red.shade400,
                       shape: BoxShape.circle,
                     ),
@@ -58,7 +56,7 @@ class _SigninScreenState extends State<SigninScreen> {
                   ),
                 ),
                 36.heightBox,
-                 Text(
+                Text(
                   'Welcome Back',
                   style: TextStyle(
                     color: Colors.red.shade400,
@@ -92,13 +90,40 @@ class _SigninScreenState extends State<SigninScreen> {
                     const SizedBox(
                       height: 8,
                     ),
-                    PrimaryTextField(
+                    TextFormField(
                       controller: emailController,
-                      text: 'Enter your email',
-                      prefixIcon:  Icon(
-                        Icons.email,
-                        color: Colors.red.shade400,
-                      ),
+                      cursorColor: Colors.red,
+                      decoration: InputDecoration(
+                          contentPadding: EdgeInsets.symmetric(
+                            vertical: MediaQuery.of(context).size.width * 0.030,
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(33),
+                            borderSide: const BorderSide(
+                              color: Colors.black45,
+                            ),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(33),
+                            borderSide: const BorderSide(
+                              color: Colors.black,
+                            ),
+                          ),
+                          hintStyle: const TextStyle(
+                            color: Color(0xFF828A89),
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400,
+                          ),
+                          isDense: true,
+                          prefixIcon: Icon(
+                            Icons.email,
+                            color: Colors.red,
+                          ),
+                          hintText: 'Enter your email',
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(33))),
+                              keyboardType: TextInputType.emailAddress,
+
                     ),
                     // TextFormField(controller: emailController,),
                     10.heightBox,
@@ -116,14 +141,15 @@ class _SigninScreenState extends State<SigninScreen> {
                     PrimaryTextField(
                         obsecure: _obscurePassword,
                         suffixIcon: IconButton(
-                          icon: Icon(_obscurePassword
-                              ? Icons.visibility
-                              : Icons.visibility_off,
-                              color: Colors.red.shade400,
-                              ),
+                          icon: Icon(
+                            _obscurePassword
+                                ? Icons.visibility
+                                : Icons.visibility_off,
+                            color: Colors.red.shade400,
+                          ),
                           onPressed: _togglePasswordVisibility,
                         ),
-                        prefixIcon:  Icon(
+                        prefixIcon: Icon(
                           Icons.password,
                           color: Colors.red.shade400,
                         ),
@@ -138,7 +164,7 @@ class _SigninScreenState extends State<SigninScreen> {
                           onTap: () {
                             Get.to(() => const ForgotPasswordScreen());
                           },
-                          child:  Text(
+                          child: Text(
                             'Forgot password',
                             style: TextStyle(
                               color: Colors.red.shade400,
@@ -174,7 +200,7 @@ class _SigninScreenState extends State<SigninScreen> {
                               height: 50,
                               width: 349 * 12,
                               decoration: BoxDecoration(
-                                color:Colors.red.shade400,
+                                color: Colors.red.shade400,
                                 borderRadius: BorderRadius.circular(44),
                               ),
                               child: const Center(
@@ -190,13 +216,11 @@ class _SigninScreenState extends State<SigninScreen> {
                               ),
                             ),
                           ),
-                         
                         ],
                       ),
                     ),
                   ],
                 ),
-               
                 const SizedBox(
                   height: 22,
                 ),
@@ -204,7 +228,7 @@ class _SigninScreenState extends State<SigninScreen> {
                   onTap: () {
                     Get.to(() => const DataScreen());
                   },
-                  child:  Row(
+                  child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -234,6 +258,4 @@ class _SigninScreenState extends State<SigninScreen> {
       ),
     );
   }
-
- 
 }

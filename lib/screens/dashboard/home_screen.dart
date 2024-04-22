@@ -217,10 +217,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
-                                                const Text(
+                                                 Text(
                                                   'Blood type',
                                                   style: TextStyle(
-                                                    color: Colors.green,
+                                                    color: Colors.red.shade400,
                                                     fontSize: 16,
                                                     fontWeight: FontWeight.w500,
                                                   ),
@@ -238,10 +238,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
-                                                const Text(
+                                                 Text(
                                                   'Address',
                                                   style: TextStyle(
-                                                    color: Colors.green,
+                                                    color: Colors.red.shade400,
                                                     fontSize: 16,
                                                     fontWeight: FontWeight.w500,
                                                   ),
@@ -257,6 +257,35 @@ class _HomeScreenState extends State<HomeScreen> {
                                             )
                                           ],
                                         ),
+                                        SizedBox(
+                                          height: 6,
+                                        ),
+                                         Row(
+                                           children: [
+                                             Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                     Text(
+                                                      'Contact',
+                                                      style: TextStyle(
+                                                        color: Colors.red.shade400,
+                                                        fontSize: 16,
+                                                        fontWeight: FontWeight.w500,
+                                                      ),
+                                                    ),
+                                                    Text(
+                                                      data['contact'],
+                                                      style: const TextStyle(
+                                                        color: Color(0xFF474747),
+                                                        fontSize: 14,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                           ],
+                                         ),
+                                    
                                         const SizedBox(
                                           height: 12,
                                         ),
@@ -280,82 +309,99 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   isEqualTo: data['userId'])
                                               .snapshots(),
                                           builder: (context, snapshot) {
-                                         
                                             return Column(
-                                              children:snapshot.data?.docs.map((e) {
-                                                return Column(
-                                                  children: [
-                                                    GestureDetector(
-                                          onTap: () async {
-                                            // DocumentSnapshot<
-                                            //         Map<String, dynamic>>
-                                            //     document =
-                                            //     await FirebaseFirestore.instance
-                                            //         .collection('donors')
-                                            //         .doc(FirebaseAuth.instance
-                                            //             .currentUser!.uid)
-                                            //         .get();
-                                            // final userData = document.data()!;
-                                            // String userName =
-                                            //     userData['username'];
+                                                children:
+                                                    snapshot.data?.docs
+                                                            .map((e) {
+                                                          return Column(
+                                                            children: [
+                                                              GestureDetector(
+                                                                onTap:
+                                                                    () async {
+                                                                  // DocumentSnapshot<
+                                                                  //         Map<String, dynamic>>
+                                                                  //     document =
+                                                                  //     await FirebaseFirestore.instance
+                                                                  //         .collection('donors')
+                                                                  //         .doc(FirebaseAuth.instance
+                                                                  //             .currentUser!.uid)
+                                                                  //         .get();
+                                                                  // final userData = document.data()!;
+                                                                  // String userName =
+                                                                  //     userData['username'];
 
-                                            // dataController.createNotification(
-                                            //   userId: data['userId'],
-                                            //   message:
-                                            //       '$userName accepted your request now you can chat with each other',
-                                            // );
-                                            // LocalNotificationService
-                                            //     .sendNotification(
-                                            //         title: 'Request Accepted',
-                                            //         message:
-                                            //             '$userName accepted your request',
-                                            //         token: data['fcmToken']);
-                                                     Get.to(() => ChatScreen(
-                                                  fcmToken:
-                                                      e['fcmToken'],
-                                                  name: e['username'],
-                                                  image: e['image'],
-                                                  uid: e['userId'],
-                                                  groupId: FirebaseAuth.instance
-                                                      .currentUser!.uid,
-                                                ));
-
-
-
-                                          },
-                                           child: Container(
-                                            margin: EdgeInsets.only(
-                                                left: Get.width * .44),
-                                            height: 34,
-                                            width: Get.width * .4,
-                                            decoration: BoxDecoration(
-                                              color: Colors.red.shade400,
-                                              borderRadius:
-                                                  BorderRadius.circular(6),
-                                            ),
-                                            child: const Center(
-                                              child: Text(
-                                                'Accept',
-                                                textAlign: TextAlign.center,
-                                                style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.w500,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        )
-                                                  ],
-                                                );
-
-                                              }).toList()??[]
-                                                  
-                                              
-                                            );
+                                                                  // dataController.createNotification(
+                                                                  //   userId: data['userId'],
+                                                                  //   message:
+                                                                  //       '$userName accepted your request now you can chat with each other',
+                                                                  // );
+                                                                  // LocalNotificationService
+                                                                  //     .sendNotification(
+                                                                  //         title: 'Request Accepted',
+                                                                  //         message:
+                                                                  //             '$userName accepted your request',
+                                                                  //         token: data['fcmToken']);
+                                                                  Get.to(() =>
+                                                                      ChatScreen(
+                                                                        fcmToken:
+                                                                            e['fcmToken'],
+                                                                        name: e[
+                                                                            'username'],
+                                                                        image: e[
+                                                                            'image'],
+                                                                        uid: e[
+                                                                            'userId'],
+                                                                        groupId: FirebaseAuth
+                                                                            .instance
+                                                                            .currentUser!
+                                                                            .uid,
+                                                                      ));
+                                                                },
+                                                                child:
+                                                                    Container(
+                                                                  margin: EdgeInsets.only(
+                                                                      left: Get
+                                                                              .width *
+                                                                          .44),
+                                                                  height: 34,
+                                                                  width:
+                                                                      Get.width *
+                                                                          .4,
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                    color: Colors
+                                                                        .red
+                                                                        .shade400,
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(6),
+                                                                  ),
+                                                                  child:
+                                                                      const Center(
+                                                                    child: Text(
+                                                                      'Accept',
+                                                                      textAlign:
+                                                                          TextAlign
+                                                                              .center,
+                                                                      style:
+                                                                          TextStyle(
+                                                                        color: Colors
+                                                                            .white,
+                                                                        fontSize:
+                                                                            15,
+                                                                        fontWeight:
+                                                                            FontWeight.w500,
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              )
+                                                            ],
+                                                          );
+                                                        }).toList() ??
+                                                        []);
                                           },
                                         ),
-                                      
                                       ],
                                     ),
                                   ),
