@@ -96,7 +96,7 @@ class _DataScreenState extends State<DataScreen> {
                     height: 4,
                   ),
                   const Text(
-                    'Let’s create account together',
+                    'Create Blood Accpter Account ',
                     style: TextStyle(
                       color: Color(0xFF828A89),
                       fontSize: 16,
@@ -154,6 +154,7 @@ class _DataScreenState extends State<DataScreen> {
                         height: 5,
                       ),
                       PrimaryTextField(
+                        
                         controller: nameController,
                         text: 'Enter your name',
                         prefixIcon: Icon(
