@@ -35,7 +35,7 @@ class _HelpScreenState extends State<HelpScreen> {
             ),
             SizedBox(width: Get.width * .2),
             const Text(
-              'About',
+              'Need Help',
               style: TextStyle(
                 color: Color(0xFF1A1A1A),
                 fontSize: 20,
@@ -72,11 +72,11 @@ class _HelpScreenState extends State<HelpScreen> {
             ),
             const SizedBox(height: 10),
             const Text(
-              'Email: support@groceryapp.com',
+              'Email: support@bloodpoint.com',
               style: TextStyle(fontSize: 16),
             ),
             const Text(
-              'Phone: 03065794369',
+              'Phone: 03076300935',
               style: TextStyle(fontSize: 16),
             ),
             const SizedBox(height: 20),
@@ -88,19 +88,11 @@ class _HelpScreenState extends State<HelpScreen> {
                   color: Colors.red.shade400),
             ),
             const Text(
-              '1. How do I place an order?',
+              '1. How do I Donate Blood?',
               style: TextStyle(fontSize: 16),
             ),
             const Text(
-              'To place an order, simply browse through the catalog, select the items you want, and proceed to checkout.',
-              style: TextStyle(fontSize: 16),
-            ),
-            const Text(
-              '2. How can I track my order?',
-              style: TextStyle(fontSize: 16),
-            ),
-            const Text(
-              'Once your order is placed, you can track its status in the "Order History" section of the app.',
+              'Go to the home screen and view request which criteria meet you and your blood so you can accept request and donat blood.',
               style: TextStyle(fontSize: 16),
             ),
             const Text(
